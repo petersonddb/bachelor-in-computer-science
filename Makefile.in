@@ -1,0 +1,110 @@
+#
+#   LPVDP - Layered Parallel Virtual Distributed Platform
+#   Copyright (C) 2018 Peterson Daronch de Bem (petersondaronch@gmail.com)
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Lesser General Public License as published by
+#   the Free Software Foundation, version 3 of the License.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Lesser General Public License for more details.
+#
+#   You should have received a copy of the GNU Lesser General Public License
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+# Variables
+SRCD = src
+
+LPVDP_SRCD = $(SRCD)/LPVDP
+LPVDP_CFLAGS = -I$(LPVDP_SRCD) -c -fpic $(DBG) \
+	       -I$(LPVDP_ED_SRCD) -I$(LPVDP_GT_SRCD) \
+	       -I$(LPVDP_GP_SRCD)
+LPVDP_SRC = $(wildcard $(LPVDP_SRCD)/*.c) \
+            $(wildcard $(LPVDP_ED_SRCD)/*.c) \
+            $(wildcard $(LPVDP_GT_SRCD)/*.c) \
+            $(wildcard $(LPVDP_GP_SRCD)/*.c)
+LPVDP_INC = $(wildcard $(LPVDP_SRCD)/*.h)
+LPVDP_ED_INC = $(wildcard $(LPVDP_ED_SRCD)/*.h)
+LPVDP_GT_INC = $(wildcard $(LPVDP_GT_SRCD)/*.h)
+LPVDP_GP_INC = $(wildcard $(LPVDP_GP_SRCD)/*.h)
+LPVDP_OBJ = $(LPVDP_SRC:.c=.o)
+LPVDP_DEP = $(LPVDP_SRC:.c=.d)
+LPVDP = lpvdp
+LPVDP_SOLIB = liblpvdp.so
+LPVDP_LOC = $(LPVDP_SRCD)/$(LPVDP_SOLIB)
+LPVDP_ED_SRCD = $(LPVDP_SRCD)/estruturas_dados
+LPVDP_GT_SRCD = $(LPVDP_SRCD)/gerenciador_terminais
+LPVDP_GP_SRCD = $(LPVDP_SRCD)/gerenciador_plugins
+LPVDP_LDFLAGS = -ldl -lpthread
+
+FRONT_SRCD = $(SRCD)/Frontends
+
+FRONT_LPVDPIU_SRCD = $(FRONT_SRCD)/lpvdp_iu
+FRONT_LPVDPIU_CFLAGS = -I$(FRONT_LPVDPIU_SRCD) \
+		       -I$(LPVDP_SRCD) -I$(LPVDP_ED_SRCD) \
+		       -I$(LPVDP_GT_SRCD) -I$(LPVDP_GP_SRCD) -c $(DBG)
+FRONT_LPVDPIU_SRC = $(wildcard $(FRONT_LPVDPIU_SRCD)/*.c)
+FRONT_LPVDPIU_OBJ = $(FRONT_LPVDPIU_SRC:.c=.o)
+FRONT_LPVDPIU_DEP = $(FRONT_LPVDPIU_SRC:.c=.d)
+FRONT_LPVDPIU = lpvdp
+FRONT_LPVDPIU_LOC = $(FRONT_LPVDPIU_SRCD)/$(FRONT_LPVDPIU)
+FRONT_LPVDPIU_LDFLAGS = -L$(LPVDP_SRCD) -l$(LPVDP) \
+			-Wl,-rpath=$(DESTDIR)$(PREFIX)/lib
+
+# Main rules
+All: $(FRONT_LPVDPIU_LOC)
+
+$(LPVDP_LOC): $(LPVDP_OBJ)
+	$(CC) -o $@ $^ -shared $(LPVDP_LDFLAGS)
+
+$(LPVDP_SRCD)/%.o: $(LPVDP_SRCD)/%.c
+	$(CC) -o $@ $< $(LPVDP_CFLAGS)
+
+$(FRONT_LPVDPIU_LOC): $(FRONT_LPVDPIU_OBJ) $(LPVDP_LOC)
+	$(CC) -o $@ $(FRONT_LPVDPIU_OBJ) $(FRONT_LPVDPIU_LDFLAGS)
+
+$(FRONT_LPVDPIU_SRCD)/%.o: $(FRONT_LPVDPIU_SRCD)/%.c
+	$(CC) -o $@ $< $(FRONT_LPVDPIU_CFLAGS)
+
+# Dependencies
+-include $(LPVDP_DEP) $(FRONT_LPVDPIU_DEP)
+
+$(LPVDP_SRCD)/%.d: $(LPVDP_SRCD)/%.c
+	@$(CC) $(LPVDP_CFLAGS) $< -M -MT $(@:.d=.o) > $@
+
+$(FRONT_LPVDPIU_SRCD)/%.d: $(FRONT_LPVDPIU_SRCD)/%.c
+	@$(CC) $(FRONT_LPVDPIU_CFLAGS) $< -M -MT $(@:.d=.o) > $@
+
+# Commands
+.PHONY: clean
+clean:
+	rm -f $(LPVDP_OBJ) $(LPVDP_DEP) $(LPVDP_LOC) \
+		$(FRONT_LPVDPIU_OBJ) $(FRONT_LPVDPIU_DEP) $(FRONT_LPVDPIU_LOC)
+
+.PHONY: install
+install: $(FRONT_LPVDPIU_LOC) $(LPVDP_LOC)
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(PREFIX)/lib
+	mkdir -p $(DESTDIR)$(PREFIX)/include
+	mkdir -p $(DESTDIR)$(PREFIX)/include/estruturas_dados
+	mkdir -p $(DESTDIR)$(PREFIX)/include/gerenciador_terminais
+	mkdir -p $(DESTDIR)$(PREFIX)/include/gerenciador_plugins
+	cp $(FRONT_LPVDPIU_LOC) $(DESTDIR)$(PREFIX)/bin/
+	cp $(LPVDP_LOC) $(DESTDIR)$(PREFIX)/lib/ 
+	cp $(LPVDP_INC) $(DESTDIR)$(PREFIX)/include/
+	cp $(LPVDP_ED_INC) $(DESTDIR)$(PREFIX)/include/estruturas_dados/
+	cp $(LPVDP_GT_INC) $(DESTDIR)$(PREFIX)/include/gerenciador_terminais/
+	cp $(LPVDP_GP_INC) $(DESTDIR)$(PREFIX)/include/gerenciador_plugins/
+
+.PHONY: uninstall
+uninstall:
+	rm -f $(DESTDIR)$(PREFIX)/bin/$(FRONT_LPVDPIU)
+	rm -f $(DESTDIR)$(PREFIX)/lib/$(LPVDP_SOLIB)
+	rm -f $(patsubst $(LPVDP_SRCD)/%.h,$(DESTDIR)$(PREFIX)/include/%.h,$(LPVDP_INC))
+	rm -f -r $(DESTDIR)$(PREFIX)/include/estruturas_dados
+	rm -f -r $(DESTDIR)$(PREFIX)/include/gerenciador_terminais
+	rm -f -r $(DESTDIR)$(PREFIX)/include/gerenciador_plugins
+

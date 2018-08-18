@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+#   LPVDP - Layered Parallel Virtual Distributed Platform
+#   Copyright (C) 2018 Peterson Daronch de Bem (petersondaronch@gmail.com)
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Lesser General Public License as published by
+#   the Free Software Foundation, version 3 of the License.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Lesser General Public License for more details.
+#
+#   You should have received a copy of the GNU Lesser General Public License
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+INCLUDES=
+DEBUGSYM=true
+
+for arg in "$@"; do
+	case "$arg" in
+		--includes=*)
+			INCLUDES=`echo $arg | sed 's/--includes=//'`;;
+		--enable-debug)
+			DEBUGSYM=true;;
+		--disable-debug)
+			DEBUGSYM=false;;
+		--help)
+			echo 'Usage: ./configure [options]'
+			echo 'Options:'
+			echo '	--includes=<path>: includes paths'
+			echo '	--enable-debug: include debug symbols'
+			echo '	--disable-debug: do not include debug symbols'
+			echo 'All invalid options are silently ignored'
+			exit 0;;
+	esac
+done
+
+echo 'Generating Makefile...'
+echo "INCS = -I$INCLUDES" > Makefile
+if $DEBUGSYM; then
+	echo 'DBG = -g' >> Makefile
+fi
+cat Makefile.in >> Makefile
+echo 'Configuration complete, type make to build.'

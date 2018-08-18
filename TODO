@@ -1,0 +1,7 @@
+Some known to do things:
+
+* Translate all to english (code, docs... everything);
+* Improve load balancing;
+* Improve the parallelization protocol (see lpvdp.c);
+* Improve the build process;
+* Add automatic plugin propagation from a platform execution instance to it known others and a propagated plugin acceptance policies system.

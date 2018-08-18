@@ -1,0 +1,50 @@
+#
+#   LPVDP - Layered Parallel Virtual Distributed Platform
+#   Copyright (C) 2018 Peterson Daronch de Bem (petersondaronch@gmail.com)
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Lesser General Public License as published by
+#   the Free Software Foundation, version 3 of the License.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Lesser General Public License for more details.
+#
+#   You should have received a copy of the GNU Lesser General Public License
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+# Variables
+CFLAGS = -I. -c -fpic $(DBG) $(INCS)
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+DEP = $(SRC:.c=.d)
+P = sample_plugin_tres
+SOLIB = lib$(P).so
+DEST = ~/lpvdp_plugins
+
+# Main rules
+$(SOLIB): $(OBJ)
+	$(CC) -o $@ $^ -shared 
+
+# Dependencies
+-include $(DEP)
+
+%.d: %.c
+	@$(CC) $(CFLAGS) $< -M -MT $(@:.d=.o) > $@
+
+# Commands
+.PHONY: clean
+clean:
+	rm -f $(OBJ) $(DEP) $(SOLIB)
+
+.PHONY: install
+install: $(SOLIB)
+	mkdir -p $(DEST)
+	cp $(SOLIB) $(DEST)/
+
+.PHONY: uninstall
+uninstall:
+	rm -f $(DEST)/$(SOLIB)
+
