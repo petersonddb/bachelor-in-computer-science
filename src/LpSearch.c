@@ -134,10 +134,10 @@ void menu()
         system("clear");
         
         //Imprime o titulo do programa
-        printf("\n\n\tLpSearch - Dicionario de significados -> Menu:\n\n");
+        printf("\n\n\tLpSearch - Words dictionary -> Menu\n\n");
         
         //Imprime informações
-        printf("\t[SETAS] - Posicionar [ENTER] - Confirmar [CTRL + F] - Fechar/Voltar\n\n\n\n");
+        printf("\t[ARROWS] - Positioning [ENTER] - Confirm [CTRL + F] - Close/Go back\n\n\n\n");
         
         //Remove cursor atual
         if (chrPosicao != NULL)
@@ -149,7 +149,7 @@ void menu()
         //Trata falha
         if (chrPosicao == NULL)
         {
-            printf("\t\tFalha na geração do menu, programa sera fechado!\n\n");
+            printf("\t\tMenu failed! There is not enough memory.\n\n");
             break;
         }
         
@@ -176,9 +176,9 @@ void menu()
         //Imprime menu na saida padrão
         printf
         (
-            "\t\t%c Busca %c\n\n"
-            "\t\t%c Cadastros %c\n\n"
-            "\t\t%c Sair %c\n\n\n\n",
+            "\t\t%c Search %c\n\n"
+            "\t\t%c Manage Words %c\n\n"
+            "\t\t%c Exit %c\n\n\n\n",
             chrPosicao[0], chrPosicao[3], 
             chrPosicao[1], chrPosicao[4], 
             chrPosicao[2], chrPosicao[5]
@@ -221,13 +221,13 @@ void busca()
         system("clear");
         
         //Imprime o titulo do programa
-        printf("\n\n\tLpSearch - Dicionario de significados -> Menu -> Busca\n\n");
+        printf("\n\n\tLpSearch - Words dictionary -> Menu -> Search\n\n");
         
         //Imprime rodapé
-        printf("\t[SETAS] - Percorre textos encontrados [CTRL + F] - Fechar/Voltar\n\n");
+        printf("\t[ARROWS] - Navigate in found texts [CTRL + F] - Close/Go back\n\n");
         
         //Imprime complementos encontrados e seus significados
-        printf("\tEncontrados [%d]\n\n", intEncontrados);
+        printf("\tFound [%d]\n\n", intEncontrados);
         if (txtEncontrados != NULL)
         {
             //Escreve atual
@@ -248,10 +248,10 @@ void busca()
                 );
         }
         else
-            printf("\t\tNenhum por enquanto.");
+            printf("\t\tNone so far.");
         
         //Imprime informação ao usuário
-        printf("\n\n\n\tDigite o Identificador: \n\n\t\t%s", chrTexto);
+        printf("\n\n\n\tType the word: \n\n\t\t%s", chrTexto);
         
         //Aguarda o próximo comando ou caractere
         intCaractereTemporario = getch();
@@ -307,10 +307,10 @@ void cadastros()
         system("clear");
         
         //Imprime o titulo do programa
-        printf("\n\n\tLpSearch - Dicionario de significados -> Menu -> Cadastros:\n\n");
+        printf("\n\n\tLpSearch - Words dictionary -> Menu -> Manage Words\n\n");
         
         //Imprime informações
-        printf("\t[SETAS] - Posicionar [ENTER] - Confirmar [CTRL + F] - Fechar/Voltar\n\n\n\n");
+        printf("\t[ARROWS] - Positioning [ENTER] - Confirm [CTRL + F] - Close/Go back\n\n\n\n");
         
         //Remove cursor atual
         if (chrPosicao != NULL)
@@ -322,7 +322,7 @@ void cadastros()
         //Trata falha
         if (chrPosicao == NULL)
         {
-            printf("\t\tFalha na geração do menu, programa sera fechado!\n\n");
+            printf("\t\tMenu failed! There is not enough memory.\n\n");
             break;
         }
         
@@ -349,9 +349,9 @@ void cadastros()
         //Imprime menu na saida padrão
         printf
         (
-            "\t\t%c Adicionar %c\n\n"
-            "\t\t%c Excluir %c\n\n"
-            "\t\t%c Voltar ao Menu %c\n\n\n\n",
+            "\t\t%c Add %c\n\n"
+            "\t\t%c Remove %c\n\n"
+            "\t\t%c Go back %c\n\n\n\n",
             chrPosicao[0], chrPosicao[3], 
             chrPosicao[1], chrPosicao[4], 
             chrPosicao[2], chrPosicao[5]
@@ -393,20 +393,20 @@ int cadastroDeTexto()
         system("clear");
         
         //Imprime o titulo do programa
-        printf("\n\n\tLpSearch - Dicionario de significados -> Menu -> Cadastro de Texto\n\n");
+        printf("\n\n\tLpSearch - Words dictionary -> Menu -> Manage Words -> Add -> Word\n\n");
         
         //Imprime rodapé
-        printf("\t[ENTER] - Confirmar [CTRL + F] - Fechar/Voltar\n\n");
+        printf("\t[ENTER] - Confirm [CTRL + F] - Close/Go back\n\n");
         
         //Exibe erro
         switch (intErro)
         {
-            case 1: printf("\n\t\tIdentificacao, preenchimento obrigatorio!"); break;
-            case 2: printf("\n\t\tIdentificacao informada ja esta em uso!"); break;
+            case 1: printf("\n\t\tA word is required!"); break;
+            case 2: printf("\n\t\tThis word was already taken!"); break;
         }
         
         //Solicita um identificador
-        printf("\n\n\n\n\tDigite o Identificador: \n\n\t\t%s", txtCadastro.chrTexto);
+        printf("\n\n\n\n\tType the word: \n\n\t\t%s", txtCadastro.chrTexto);
         
         //Aguarda o próximo comando ou caractere
         intCaractereTemporario = getch();
@@ -447,7 +447,7 @@ int cadastroDeTexto()
                     adicionarTextoNoGrafo(txtCadastro.chrTexto, txtCadastro.chrDescricao, &vrtRaiz);
                     
                     //Verifica se o usuário quer cadastrar mais um texto
-                    if (confirmacao("Continuar cadastrando?"))
+                    if (confirmacao("Keep adding?"))
                         return 1;
                     
                     //Sinaliza encerramento do cadastro
@@ -476,19 +476,19 @@ int cadastroDeDescricao(struct Texto *txtCadastro)
         system("clear");
         
         //Imprime o titulo do programa
-        printf("\n\n\tLpSearch - Dicionario de significados -> Menu -> Cadastro de Descrição\n\n");
+        printf("\n\n\tLpSearch - Words dictionary -> Menu -> Manage Words -> Add -> Description\n\n");
         
         //Imprime rodapé
-        printf("\t[ENTER] - Confirmar [CTRL + F] - Fechar/Voltar\n\n");
+        printf("\t[ENTER] - Confirm [CTRL + F] - Close/Go back\n\n");
         
         //Exibe erro
         switch (intErro)
         {
-            case 1: printf("\n\t\tDescricao, preenchimento obrigatorio!"); break;
+            case 1: printf("\n\t\tA description is required!"); break;
         }
         
         //Solicita uma Descricao
-        printf("\n\n\n\n\tDigite uma descricao para %s: \n\n\t\t%s", txtCadastro->chrTexto, txtCadastro->chrDescricao);
+        printf("\n\n\n\n\tType a description to %s: \n\n\t\t%s", txtCadastro->chrTexto, txtCadastro->chrDescricao);
         
         //Aguarda o próximo comando ou caractere
         intCaractereTemporario = getch();
@@ -530,10 +530,10 @@ int confirmacao(char chrMensagem[])
         system("clear");
         
         //Imprime o titulo do programa
-        printf("\n\n\tLpSearch - Dicionario de significados -> Menu -> Cadastros:\n\n");
+        printf("\n\n\tLpSearch - Words dictionary -> Menu -> Manage Words\n\n");
         
         //Imprime informações
-        printf("\t[SETAS] - Posicionar [ENTER] - Confirmar [CTRL + F] - Fechar/Voltar\n\n\n\n");
+        printf("\t[ARROWS] - Positioning [ENTER] - Confirm [CTRL + F] - Close/Go back\n\n\n\n");
         
         //Remove cursor atual
         if (chrPosicao != NULL)
@@ -545,7 +545,7 @@ int confirmacao(char chrMensagem[])
         //Trata falha
         if (chrPosicao == NULL)
         {
-            printf("\t\tFalha na geração do menu, programa sera fechado!\n\n");
+            printf("\t\tMenu failed! There is not enough memory.\n\n");
             break;
         }
         
@@ -569,8 +569,8 @@ int confirmacao(char chrMensagem[])
         printf
         (
             "\t%s\n\n\n"
-            "\t\t%c Sim %c\n\n"
-            "\t\t%c Nao %c\n\n",
+            "\t\t%c Yes %c\n\n"
+            "\t\t%c No %c\n\n",
             chrMensagem,
             chrPosicao[0], chrPosicao[2], 
             chrPosicao[1], chrPosicao[3]
@@ -611,20 +611,20 @@ int excluir()
         system("clear");
         
         //Imprime o titulo do programa
-        printf("\n\n\tLpSearch - Dicionario de significados -> Menu -> Exluir\n\n");
+        printf("\n\n\tLpSearch - Words dictionary -> Menu -> Manage Words -> Remove\n\n");
         
         //Imprime rodapé
-        printf("\t[ENTER] - Confirmar [CTRL + F] - Fechar/Voltar\n\n");
+        printf("\t[ENTER] - Confirm [CTRL + F] - Close/Go back\n\n");
         
         //Exibe erro
         switch (intErro)
         {
-            case 1: printf("\n\t\tIdentificacao, preenchimento obrigatorio!"); break;
-            case 2: printf("\n\t\tIdentificacao nao encontrada!"); break;
+            case 1: printf("\n\t\tA word is required!"); break;
+            case 2: printf("\n\t\tWord not found!"); break;
         }
         
         //Solicita um identificador
-        printf("\n\n\n\n\tDigite o Identificador: \n\n\t\t%s", chrTexto);
+        printf("\n\n\n\n\tType the word: \n\n\t\t%s", chrTexto);
         
         //Aguarda o próximo comando ou caractere
         intCaractereTemporario = getch();
@@ -660,7 +660,7 @@ int excluir()
                 excluirTextoDoGrafo(chrTexto, &vrtRaiz);
                 
                 //Verifica se o usuário quer excluir mais um texto
-                if (confirmacao("Continuar exclusoes?"))
+                if (confirmacao("Keep removing?"))
                     return 1;
                 
                 //Sinaliza encerramento do cadastro
