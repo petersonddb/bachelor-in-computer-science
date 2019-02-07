@@ -19,7 +19,7 @@
 
 #include <string.h>
 
-#define GT_TESTES_SAIDA "[GT TESTES]"
+#define GT_TESTES_SAIDA "[GT TESTS]"
 
 /* Prototipos */
 void gt_testar_saida(FILE *, char *);
@@ -41,9 +41,9 @@ gt_resultado gt_testar(FILE *saida) {
     
     int bd;
     
-    gt_testar_saida(saida, "== Testando inclusão de novo terminal no bd ==");
+    gt_testar_saida(saida, "== Adding a new terminal onto the database ==");
     if((bd = gt_bd_abrir(GT_BD_ABERTURA_MODO_LE)) < 0) {
-        gt_testar_saida(saida, "BD não pode ser aberto!");
+        gt_testar_saida(saida, "database could not be opened!");
         return GT_TESTES_FALHA;
     }
     
@@ -59,7 +59,7 @@ gt_resultado gt_testar(FILE *saida) {
         return GT_TESTES_FALHA;
     }
     
-    gt_testar_saida(saida, "== Testando recuperação do terminal recém incluído no bd ==");
+    gt_testar_saida(saida, "== Retrieving the just added terminals from the database ==");
     memset(&t, 0, sizeof(gt_terminal));
     if((resultado = gt_bd_buscar_por_nome("__TESTE_A", &t, bd)) != GT_ENCONTRADO) {
         gt_testar_saida(saida, gt_str_resultado(resultado));
@@ -72,10 +72,10 @@ gt_resultado gt_testar(FILE *saida) {
         return GT_TESTES_FALHA;
     }
     
-    gt_testar_saida(saida, "== Imprimindo todos os terminais do BD ==");
+    gt_testar_saida(saida, "== Printing all the terminals on the database ==");
     gt_bd_imprimir_ipv4(saida, bd);
     
-    gt_testar_saida(saida, "== Testando carregamento dos terminais em uma lista ==");
+    gt_testar_saida(saida, "== Loading terminals into a list ==");
     if((llbd_resultado = ed_llbd_criar(&lista)) != ED_LLBD_CRIADA) {
         gt_testar_saida(saida, ed_llbd_str_resultado(llbd_resultado));
         return GT_TESTES_FALHA;
@@ -86,7 +86,7 @@ gt_resultado gt_testar(FILE *saida) {
         return GT_TESTES_FALHA;
     }
         
-    gt_testar_saida(saida, "== Testando recuperação dos terminais recém adicionados na lista ==");
+    gt_testar_saida(saida, "== Retrieving the just added terminals from the list ==");
     memset(nome, 0 , sizeof(gt_nome_t));
     strcpy(nome, "__TESTE_A");
     if((resultado = gt_ed_llbd_buscar_por_nome(*lista, nome, &t_tmp)) != GT_ENCONTRADO) {
@@ -94,7 +94,7 @@ gt_resultado gt_testar(FILE *saida) {
         return GT_TESTES_FALHA;
     }
     ip4 = gt_obter_ip4_de_endereco(t_tmp->endereco);
-    fprintf(saida, "Nome: %s Tipo: IP Versão: 4 Endereço: %s Porta: %d\n", t_tmp->nome, ip4.ip_endereco, ip4.porta);
+    fprintf(saida, "Name: %s Type: IP Version: 4 Address: %s Port: %d\n", t_tmp->nome, ip4.ip_endereco, ip4.porta);
     
     memset(nome, 0 , sizeof(gt_nome_t));
     strcpy(nome, "__TESTE_B");
@@ -103,18 +103,18 @@ gt_resultado gt_testar(FILE *saida) {
         return GT_TESTES_FALHA;
     }
     ip4 = gt_obter_ip4_de_endereco(t_tmp->endereco);
-    fprintf(saida, "Nome: %s Tipo: IP Versão: 4 Endereço: %s Porta: %d\n", t_tmp->nome, ip4.ip_endereco, ip4.porta);
+    fprintf(saida, "Name: %s Type: IP Version: 4 Address: %s Port: %d\n", t_tmp->nome, ip4.ip_endereco, ip4.porta);
     
-    gt_testar_saida(saida, "== Imprimindo todos os terminais da lista ==");
+    gt_testar_saida(saida, "== Printing all the terminals in the list ==");
     gt_ed_llbd_imprimir_ipv4(*lista, saida);
     
-    gt_testar_saida(saida, "== Testando remoção de todos os terminais da lista ==");
+    gt_testar_saida(saida, "== Cleaning the list ==");
     if((llbd_resultado = ed_llbd_liberar(lista)) != ED_LLBD_ATUALIZADA) {
         gt_testar_saida(saida, ed_llbd_str_resultado(llbd_resultado));
         return GT_TESTES_FALHA;
     }
     
-    gt_testar_saida(saida, "== Testando remocao de todos os terminais recem adicionados no BD ==");
+    gt_testar_saida(saida, "== Removing the just added terminals from the database ==");
     if((resultado = gt_bd_remover_por_nome("__TESTE_A", bd)) != GT_REMOVIDO || (resultado = gt_bd_remover_por_nome("__TESTE_B", bd)) != GT_REMOVIDO) {
         gt_testar_saida(saida, gt_str_resultado(resultado));
         return GT_TESTES_FALHA;

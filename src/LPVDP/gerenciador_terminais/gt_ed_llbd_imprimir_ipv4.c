@@ -38,7 +38,7 @@ gt_resultado gt_ed_llbd_imprimir_ipv4(ed_llbd llbd, FILE *saida) {
         ip4 = gt_obter_ip4_de_endereco(t.endereco);
         fprintf(
             saida, 
-            "Nome: %s Tipo: IP Versão: 4 Endereço: %s Porta: %d\n",
+            "Name: %s Type: IP Version: 4 Address: %s Port: %d\n",
             t.nome,
             ip4.ip_endereco,
             ip4.porta

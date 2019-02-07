@@ -19,7 +19,7 @@
 
 #include <string.h>
 
-#define GP_TESTES_SAIDA "[GP TESTES]"
+#define GP_TESTES_SAIDA "[GP TESTS]"
 
 /* Prototipos */
 void gp_testar_saida(FILE *, char *);
@@ -34,12 +34,12 @@ gp_resultado gp_testar(FILE *saida) {
     gp_resultado resultado;
     gp_caminho_t plugin;
     
-    gp_testar_saida(saida, "== Todos os plugins ==");
+    gp_testar_saida(saida, "== All the plugins ==");
     gp_imprimir(saida, gp_abrir());
     
-    gp_testar_saida(saida, "== Acessando um plugin ==");
+    gp_testar_saida(saida, "== Accessing a plugin ==");
     plugin = gp_obter_caminho("libsample_plugin_um.so");
-    fprintf(saida, "Nome: %s\n", plugin);
+    fprintf(saida, "Name: %s\n", plugin);
     if((resultado = gp_exec(plugin)) != GP_EXECUTADO) {
         gp_testar_saida(saida, gp_str_resultado(resultado));
         return GP_FALHA_TESTES;

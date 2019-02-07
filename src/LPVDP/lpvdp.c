@@ -318,7 +318,7 @@ void *thread_entrada(void *args) {
         if((c_skt = accept(*skt, (struct sockaddr *) &cliente, &cliente_tamanho)) >= 0) {
             
 #ifdef DEBUG
-            printf("%s: Novo cliente conectado!\n", LPVDP_MSG);
+            printf("%s: New client connected!\n", LPVDP_MSG);
 #endif            
             bytes_recebidos = 0;
             memset(&msg, 0, sizeof(mensagem));
@@ -332,7 +332,7 @@ void *thread_entrada(void *args) {
                 switch(msg) {
                     case MSG_REALIZAR_TAREFA:
 #ifdef DEBUG
-            printf("%s: Nova tarefa solicitada!\n", LPVDP_MSG);
+            printf("%s: New task requested!\n", LPVDP_MSG);
 #endif
                         {
                             pthread_t tid;
@@ -383,13 +383,13 @@ lpvdp_resultado lpvdp_gt_listar(FILE *saida) {
     if((bd = gt_bd_abrir(GT_BD_ABERTURA_MODO_L)) <= 0)
         return LPVDP_GT_FALHA_ACESSO_BD;
     
-    fprintf(saida, "Banco de dados:\n");
+    fprintf(saida, "Database:\n");
     if((resultado = gt_bd_imprimir_ipv4(saida, bd)) != GT_IMPRESSOS)
         return lpvdp_gt_mapear_resultado(resultado);
     
     gt_bd_fechar(bd);
     
-    fprintf(saida, "\nCarregado na memoria:\n");
+    fprintf(saida, "\nLoaded:\n");
     
     pthread_mutex_lock(&m_st);
     
@@ -556,7 +556,7 @@ void *thread_paralelizar(void *args) {
     p_args = *(paralelizacao_argumentos *) args;
     
 #ifdef DEBUG
-    printf("%s: Thread para coordenar a paralelizacao foi iniciada!\n", LPVDP_MSG);
+    printf("%s: Thread for coordinate the task execution is running!\n", LPVDP_MSG);
 #endif
     
     pthread_mutex_lock(&m_st);
@@ -687,7 +687,7 @@ void *thread_tarefa(void *args) {
     skt = *(int *) args;
     
 #ifdef DEBUG
-    printf("%s: Thread para coordenar a execucao da tarefa foi iniciada!\n", LPVDP_MSG);
+    printf("%s: Thread for coordinate the task execution is running!\n", LPVDP_MSG);
 #endif
     
     pthread_mutex_lock(&m_st);
@@ -696,7 +696,7 @@ void *thread_tarefa(void *args) {
         msg = MSG_DISPONIVEL;
     } else {
 #ifdef DEBUG
-    printf("%s: Plataforma indisponivel (sobrecarregada)!\n", LPVDP_MSG);
+    printf("%s: Platform unavailable (overloaded)!\n", LPVDP_MSG);
 #endif
         msg = MSG_INDISPONIVEL;
         send(skt, &msg, sizeof(mensagem), 0);
@@ -748,7 +748,7 @@ void *thread_tarefa(void *args) {
     
     if((lpvdp_r = tarefa(p_args.plugin, p_args.func, &p_args.args)) != LPVDP_GP_EXECUTADO) {
 #ifdef DEBUG
-    printf("%s: Plataforma indisponivel (o plugin e/ou sua funcao nao existe)!\n", LPVDP_MSG);
+    printf("%s: Platform unavailable (the plugin and/or its procedure does not exist)!\n", LPVDP_MSG);
 #endif
         msg = MSG_INDISPONIVEL;
         send(skt, &msg, sizeof(mensagem), 0);

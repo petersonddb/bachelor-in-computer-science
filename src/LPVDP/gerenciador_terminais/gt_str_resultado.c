@@ -22,39 +22,39 @@
 
 /* constantes */
 #define GT_RESULTADO_MSG_INCLUIDO \
-    "incluido com sucesso"
+    "terminal included"
 #define GT_RESULTADO_MSG_REMOVIDO \
-    "removido com sucesso"
+    "terminal removed"
 #define GT_RESULTADO_MSG_ATUALIZADO \
-    "atualizado com sucesso"
+    "terminal updated"
 #define GT_RESULTADO_MSG_ENCONTRADO \
-    "encontrado"
+    "terminal found"
 #define GT_RESULTADO_MSG_CRIADO \
-    "criado"
+    "terminal created"
 #define GT_RESULTADO_MSG_CARREGADOS \
-    "terminais carregados"
+    "terminals loaded"
 #define GT_RESULTADO_MSG_TESTES_CONCLUIDO \
-    "testes concluídos com sucesso"
+    "tests passed"
 #define GT_RESULTADO_MSG_NAO_ENCONTRADO \
-    "nao encontrado"
+    "nothing found"
 #define GT_RESULTADO_MSG_FALHA_BD_SEEK \
-    "falha na operacao seek no BD"
+    "failed to seek the database"
 #define GT_RESULTADO_MSG_FALHA_BD_ESCRITA \
-    "falha na operacao de escrita no BD"
+    "failed to write on the database"
 #define GT_RESULTADO_MSG_FALHA_BD_LEITURA \
-    "falha na operacao de leitura no BD"
+    "failed to read from the database"
 #define GT_RESULTADO_MSG_LLBD_FALHA_NULA \
-    "lista llbd nula"
+    "list llbd are null"
 #define GT_RESULTADO_MSG_FALHA_NULO \
-    "terminal nulo"
+    "null terminal"
 #define GT_RESULTADO_MSG_LLBD_FALHA_PADRAO_NULO \
-    "padrão para busca está vazio/nulo"
+    "search pattern are empty/null"
 #define GT_RESULTADO_MSG_LLBD_FALHA_TERMINAL_NAO_ENCONTRADO \
-    "terminal não encontrado na lista"
+    "terminal not found in the list"
 #define GT_RESULTADO_MSG_TESTES_FALHA \
-    "os testes falharam"
+    "tests failed"
 #define GT_RESULTADO_MSG_DESCONHECIDO \
-    "desconhecido"
+    "unknown"
 
 
 /**

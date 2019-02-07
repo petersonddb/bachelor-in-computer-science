@@ -22,33 +22,33 @@
 
 /* constantes */
 #define ED_LLBD_CRIADA_MSG \
-    "lista criada com sucesso"
+    "list created"
 #define ED_LLBD_VAZIA_MSG \
-    "lista vazia"
+    "list are empty"
 #define ED_LLBD_NAO_VAZIA_MSG \
-    "lista não vazia"
+    "list are not empty"
 #define ED_LLBD_DESLOCAMENTOS_INVERTIDOS_MSG \
-    "tentativa de obter um número negativo de bytes"
+    "negative number of bytes"
 #define ED_LLBD_NULA_MSG \
-    "lista nula"
+    "null list"
 #define ED_LLBD_NO_NULO_MSG \
-    "nó nulo"
+    "null node"
 #define ED_LLBD_PADRAO_NULO_MSG \
-    "padrão nulo"
+    "null pattern"
 #define ED_LLBD_NO_ENCONTRADO_MSG \
-    "nó encontrado"
+    "node found"
 #define ED_LLBD_NO_NAO_ENCONTRADO_MSG \
-    "nó não encontrado"
+    "node not found"
 #define ED_LLBD_NO_ATUALIZADO_MSG \
-    "nó atualizado"
+    "node updated"
 #define ED_LLBD_NO_REMOVIDO_MSG \
-    "nó removido da lista"
+    "node removed from the list"
 #define ED_LLBD_ATUALIZADA_MSG \
-    "lista atualizada"
+    "list updated"
 #define ED_LLBD_NO_CRIADO_MSG \
-    "nó criado"
+    "node created"
 #define ED_LLBD_RESULTADO_DESCONHECIDO_MSG \
-    "desconhecido"
+    "unknown"
 
 /**
  * retorna um texto explicando

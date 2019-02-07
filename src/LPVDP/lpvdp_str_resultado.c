@@ -22,59 +22,59 @@
 
 /* constantes */
 #define LPVDP_INICIADO_MSG \
-    "iniciado com sucesso"
+    "started"
 #define LPVDP_IMPRESSOS_MSG \
-    "impressos com sucesso"
+    "printed"
 #define LPVDP_TESTES_CONCLUIDO_MSG \
-    "testes concluidos com sucesso"
+    "tests passed"
 #define LPVDP_GT_INCLUIDO_MSG \
-    "terminal incluido"
+    "terminal included"
 #define LPVDP_GP_EXECUTADO_MSG \
-    "plugin executado"
+    "plugin executed"
 #define LPVDP_PARALELIZADO_MSG \
-    "tarefa paralelizada"
+    "task parallelized"
 #define LPVDP_CONEXAO_REDE_ABERTA_MSG \
-    "conexao realizada"
+    "connected"
 #define LPVDP_GT_FALHA_ACESSO_BD_MSG \
-    "falha ao conectar-se ao banco de dados de terminais"
+    "failed to connect to the terminals database"
 #define LPVDP_GT_NAO_ENCONTRADO_MSG \
-    "terminal nao encontrado"
+    "terminal not found"
 #define LPVDP_GT_FALHA_BD_SEEK_MSG \
-    "falha ao navegar no banco de dados de terminais"
+    "failed to seek the terminals database"
 #define LPVDP_GT_FALHA_BD_ESCRITA_MSG \
-    "falha ao escrever no banco de dados de terminais"
+    "failed to write onto the terminals database"
 #define LPVDP_GT_FALHA_BD_LEITURA_MSG \
-    "falha ao ler do banco de dados de terminais"
+    "failed to read from the terminals database"
 #define LPVDP_LLBD_FALHA_NULA_MSG \
-    "lista llbd nula"
+    "null list llbd"
 #define LPVDP_GT_FALHA_NULO_MSG \
-    "terminal nulo"
+    "null terminal"
 #define LPVDP_LLBD_FALHA_PADRAO_NULO_MSG \
-    "padrao de busca nulo"
+    "null search pattern"
 #define LPVDP_LLBD_FALHA_TERMINAL_NAO_ENCONTRADO_MSG \
-    "terminal nao encontrado na lista"
+    "terminal not found in the list"
 #define LPVDP_GT_TESTES_FALHA_MSG \
-    "testes do gerenciador de terminais falhou"
+    "tests of terminals management failed"
 #define LPVDP_GP_FALHA_REPOSITORIO_NULO_MSG \
-    "repositorio de plugins nulo"
+    "null plugins repository"
 #define LPVDP_GP_FALHA_CARREGAMENTO_MSG \
-    "falha ao carregar o plugin"
+    "failed to load the plugin"
 #define LPVDP_GP_FALHA_NOME_NULO_MSG \
-    "nome do plugin nulo"
+    "null plugin name"
 #define LPVDP_FALHA_PARALELIZACAO_MSG \
-    "tarefa nao pode ser paralelizada"
+    "task could not be parallelized"
 #define LPVDP_FALHA_TENTRADA_MSG \
-    "falha no carregamento da thread de entrada"
+    "failed to load the incoming thread"
 #define LPVDP_FALHA_ABRIR_CONEXAO_REDE_MSG \
-    "falha no estabelecimento da conexao"
+    "failed to connect"
 #define LPVDP_FALHA_GT_INDISPONIVEL_MSG \
-    "nenhum terminal disponivel"
+    "no terminals available"
 #define LPVDP_FALHA_TRAVA_ESTADO_MSG \
-    "a trava de estado falhou"
+    "the state lock failed"
 #define LPVDP_FALHA_FALTA_MEMORIA_MSG \
-    "falta de memoria"
+    "no enough memory"
 #define LPVDP_DESCONHECIDO_MSG \
-    "desconhecido"
+    "unknown"
 
 
 /**

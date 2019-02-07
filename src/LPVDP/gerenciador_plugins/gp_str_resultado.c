@@ -22,23 +22,23 @@
 
 /* constantes */
 #define GP_IMPRESSOS_MSG \
-    "plugins impressos"
+    "plugins printed"
 #define GP_TESTES_CONCLUIDO_MSG \
-    "testes concluídos com sucesso"
+    "tests passed"
 #define GP_EXECUTADO_MSG \
-    "plugin executado"
+    "plugin executed"
 #define GP_COPIADO_MSG \
-    "dados de plugin copiados"
+    "plugin data copied"
 #define GP_FALHA_REPOSITORIO_NULO_MSG \
-    "repositório nulo"
+    "null repository"
 #define GP_FALHA_CARREGAMENTO_MSG \
-    "falha ao carregar o plugin"
+    "failed to load the plugin"
 #define GP_FALHA_TESTES_MSG \
-    "os testes falharam"
+    "tests failed"
 #define GP_FALHA_NOME_NULO_MSG \
-    "nome nulo"
+    "null name"
 #define GP_DESCONHECIDO_MSG \
-    "desconhecido"
+    "unknown"
 
 /**
  * retorna um texto explicando
