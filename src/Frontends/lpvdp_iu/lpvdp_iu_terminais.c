@@ -32,10 +32,10 @@ void lpvdp_iu_terminais() {
     
     do {
         printf(
-            "===== LPVDP - Terminais =====\n\n"
-            "\t[1] Incluir terminal\n"
-            "\t[2] Listar terminais\n"
-            "\t[3] Voltar\n\n"
+            "===== LPVDP - Terminals =====\n\n"
+            "\t[1] Add\n"
+            "\t[2] List\n"
+            "\t[3] Go back\n\n"
             ">"
         );
         scanf("%d", &op);
@@ -49,7 +49,7 @@ void lpvdp_iu_terminais() {
             case 3:
                 break;
             default:
-                printf("Opção inválida!\n");
+                printf("Invalid option!\n");
         }
     } while(op != 3);
 }
@@ -66,26 +66,26 @@ void incluir_terminal() {
     
     lpvdp_resultado resultado;
     
-    printf("\nCadastro de novo terminal:\n");
+    printf("\nNew terminal:\n");
     do {        
-        printf("Nome: ");
+        printf("Name: ");
         getchar(); //remove o \n
         fgets(nome, GT_TERMINAL_NOME_TAMANHO, stdin);
         nome[strlen(nome) - 1] = 0; //remove o \n
         printf("IP: ");
         fgets(endereco.ip_endereco, GT_TERMINAL_IP4_ENDERECO_TAMANHO, stdin);
         endereco.ip_endereco[strlen(endereco.ip_endereco) - 1] = 0; //remove o \n
-        printf("Porta: ");
+        printf("Port: ");
         scanf("%d", &endereco.porta);
         if((resultado = lpvdp_gt_incluir(gt_obter_terminal_ip4(nome, endereco.ip_endereco, endereco.porta))) != LPVDP_GT_INCLUIDO) {
-            printf("Falha: %s\n", lpvdp_str_resultado(resultado));
-            printf("Tentar novamente (s/n): ");
+            printf("Failed: %s\n", lpvdp_str_resultado(resultado));
+            printf("Try again (y/n): ");
             scanf("%c", &continuar);
         } else {
-            printf("Cadastrado!\n");
+            printf("Registered!\n");
             continuar = 'n';
         }
-    } while(continuar == 's');
+    } while(continuar == 'y');
     printf("\n");
     
 }
@@ -95,7 +95,7 @@ void incluir_terminal() {
  * cadastrados
  */
 void listar_terminais() {
-    printf("\nTerminais cadastrados:\n");
+    printf("\nKnown terminals:\n");
     lpvdp_gt_listar(stdout);
     printf("\n");
 }

@@ -34,9 +34,9 @@ void lpvdp_iu_plugins() {
     do {
         printf(
             "===== LPVDP - Plugins =====\n\n"
-            "\t[1] Listar plugins\n"
-            "\t[2] Executar plugin\n"
-            "\t[3] Voltar\n\n"
+            "\t[1] List\n"
+            "\t[2] Run\n"
+            "\t[3] Go back\n\n"
             ">"
         );
         scanf("%d", &op);
@@ -50,7 +50,7 @@ void lpvdp_iu_plugins() {
             case 3:
                 break;
             default:
-                printf("Opção inválida!\n");
+                printf("Invalid option!\n");
         }
     } while(op != 3);
 }
@@ -60,7 +60,7 @@ void lpvdp_iu_plugins() {
  * todos os plugins
  */
 void listar_plugins() {
-    printf("\nPlugins disponiveis:\n");
+    printf("\nAvailable plugins:\n");
     lpvdp_gp_listar(stdout);
     printf("\n");
 }
@@ -76,21 +76,21 @@ void executar_plugin() {
     
     lpvdp_resultado resultado;
     
-    printf("\nExecutar um plugin:\n");
-    do {        
-        printf("Nome: ");
+    printf("\nRun a plugin:\n");
+    do {
+        printf("Name: ");
         getchar(); //remove o \n
         fgets(nome, GP_NOME_TAMANHO, stdin);
         nome[strlen(nome) - 1] = 0; //remove o \n
-        printf("Executando...\n");
+        printf("Running...\n");
         if((resultado = lpvdp_gp_exec(nome, msg)) != LPVDP_GP_EXECUTADO) {
-            printf("Falha: %s\n", lpvdp_str_resultado(resultado));
-            printf("Tentar novamente (s/n): ");
+            printf("Failed: %s\n", lpvdp_str_resultado(resultado));
+            printf("Try again (y/n): ");
             scanf("%c", &continuar);
         } else {
             continuar = 'n';
         }
-    } while(continuar == 's');
+    } while(continuar == 'y');
     printf("\n");
 }
 

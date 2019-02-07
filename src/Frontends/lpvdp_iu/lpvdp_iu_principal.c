@@ -31,12 +31,11 @@ void lpvdp_iu_principal() {
     gt_porta_t porta_entrada;
     
     printf(
-        "===== LPVDP =====\n\n"
-        "Inicializacao:\n"
-        "Capacidade maxima de trabalho desta instancia da plataforma: "
+        "===== LPVDP - Init =====\n\n"
+	"Max workload of this instance: "
     );
     scanf("%d", &capacidade_maxima);
-    printf("Porta de entrada de solicitacoes remotas: ");
+    printf("Network port for incoming remote requests: ");
     scanf("%d", &porta_entrada);
     
     if((lpvdp_r = lpvdp_init(capacidade_maxima, porta_entrada)) != LPVDP_INICIADO)
@@ -45,9 +44,9 @@ void lpvdp_iu_principal() {
         do {
             printf(
                 "===== LPVDP - Menu =====\n\n"
-                "\t[1] Gerenciar terminais\n"
-                "\t[2] Gerenciar plugins\n"
-                "\t[3] Sair\n\n"
+                "\t[1] Terminals\n"
+                "\t[2] Plugins\n"
+                "\t[3] Exit\n\n"
                 ">"
             );
             scanf("%d", &op);
@@ -59,10 +58,10 @@ void lpvdp_iu_principal() {
                     lpvdp_iu_plugins();
                     break;
                 case 3:
-                    printf("bye!\n");
+                    printf("Bye!\n");
                     break;
                 default:
-                    printf("Opção inválida!\n");
+                    printf("Invalid option!\n");
             }
         } while(op != 3);
 }
