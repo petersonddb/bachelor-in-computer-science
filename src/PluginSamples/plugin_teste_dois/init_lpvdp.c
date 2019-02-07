@@ -34,7 +34,7 @@ void init_lpvdp() {
     
     estado = 2;
     
-    printf("Ola de dentro do plugin teste um!\n");
+    printf("Hello from inside plugin dois!\n");
     
     args.bytes = sizeof(int);
     args.dados = (void *) malloc(sizeof(int));
@@ -44,24 +44,24 @@ void init_lpvdp() {
     lpvdp_r = lpvdp_paralelizar("libsample_plugin_um.so", "testar_me", args, sucesso, falha);
     
     if(lpvdp_r != LPVDP_PARALELIZADO)
-        printf("Falha ao solicitar a paralelizacao na plataforma: %s\n", lpvdp_str_resultado(lpvdp_r));
+        printf("Failed to parallelize a procedure of plugin um for plugin dois: %s\n", lpvdp_str_resultado(lpvdp_r));
     else {
         /* Chamada a API da plataforma para paralelizar uma funcao */
         lpvdp_r = lpvdp_paralelizar("libsample_plugin_dois.so", "testar_me_2", args, sucesso, falha);
         if(lpvdp_r != LPVDP_PARALELIZADO)
-            printf("Falha ao solicitar a paralelizacao na plataforma: %s\n", lpvdp_str_resultado(lpvdp_r));
+            printf("Failed to parallelize a procedure of plugin dois: %s\n", lpvdp_str_resultado(lpvdp_r));
         else
             while(estado);
     }
     
-    printf("Bye de dentro do plugin dois\n");
+    printf("Bye from inside plugin dois\n");
     
 }
 
 lpvdp_argumentos testar_me_2(lpvdp_argumentos args) {
     lpvdp_argumentos ret;
     
-    printf("Ola de dentro da funcao testar-me_2 do plugin dois, recebi: %d!\n", *(int*)args.dados);
+    printf("Hello from inside the testar_me_2 procedure of plugin dois, I received: %d!\n", *(int*)args.dados);
     ret = args;
     *(int*)ret.dados = *(int*)ret.dados + 100;
     
@@ -72,13 +72,13 @@ lpvdp_argumentos sucesso(lpvdp_argumentos args) {
     lpvdp_argumentos ret;
     
     memset(&ret, 0, sizeof(lpvdp_argumentos));
-    printf("Ola de dentro da funcao sucesso do plugin dois, recebi: %d!\n", *(int*)args.dados);
+    printf("Hello from inside the success procedure of plugin dois, I received: %d!\n", *(int*)args.dados);
     --estado;
     
     return ret;
 }
 
 void falha(lpvdp_resultado resultado) {
-    printf("Ola de dentro da funcao falha do plugin dois com resultado: %s\n", lpvdp_str_resultado(resultado));
+    printf("Hello from inside the fail procedure of plugin dois with result: %s\n", lpvdp_str_resultado(resultado));
     --estado;
 }

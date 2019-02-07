@@ -31,19 +31,19 @@ void init_lpvdp() {
     lpvdp_argumentos args;
     lpvdp_resultado lpvdp_r;
     
-    printf("Ola de dentro do plugin teste quinto!\n");
+    printf("Hello from inside plugin cinco!\n");
     
     args.bytes = sizeof(int);
     args.dados = (void *) malloc(sizeof(int));
     *(int *) args.dados = (int) 0;
     
     /* Chamada a API da plataforma para paralelizar uma funcao */
-    lpvdp_r = lpvdp_paralelizar("libsample_plugin_quinto.so", "gerar_primos", args, NULL, NULL);
+    lpvdp_r = lpvdp_paralelizar("libsample_plugin_cinco.so", "gerar_primos", args, NULL, NULL);
     
     if(lpvdp_r != LPVDP_PARALELIZADO)
-        printf("Falha ao solicitar a paralelizacao na plataforma: %s\n", lpvdp_str_resultado(lpvdp_r));
+        printf("Failed to parallelize a procedure of plugin cinco: %s\n", lpvdp_str_resultado(lpvdp_r));
     
-    printf("Bye de dentro do plugin quinto (a geracao de primos continua ativa)\n");
+    printf("Bye from inside plugin cinco (the primes generation is going on...)\n");
 }
 
 /**
@@ -57,7 +57,7 @@ lpvdp_argumentos gerar_primos(lpvdp_argumentos args) {
     
     FILE *arq;
     
-    printf("Ola de dentro da funcao gerar_primos do plugin quinto!\n");
+    printf("Hello from inside the gerar_primos procedure, which generates primes, of plugin cinco!\n");
     
     if((arq = fopen(ARQ_PRIMOS, "w+")) >= 0) {
         unsigned long primo;

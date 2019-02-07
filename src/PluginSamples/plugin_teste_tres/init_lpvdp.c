@@ -33,7 +33,7 @@ void init_lpvdp() {
     
     estado = 1;
     
-    printf("Ola de dentro do plugin teste tres!\n");
+    printf("Hello from inside plugin tres!\n");
     
     args.bytes = sizeof(int);
     args.dados = (void *) malloc(sizeof(int));
@@ -43,11 +43,11 @@ void init_lpvdp() {
     lpvdp_r = lpvdp_paralelizar("libsample_plugin_um.so", "func_nao_existe", args, sucesso, falha);
     
     if(lpvdp_r != LPVDP_PARALELIZADO)
-        printf("Falha ao solicitar a paralelizacao na plataforma do plugin tres: %s\n", lpvdp_str_resultado(lpvdp_r));
+        printf("Failed to parallelize a procedure of plugin tres: %s\n", lpvdp_str_resultado(lpvdp_r));
     else 
         while(estado);
     
-    printf("Bye de dentro do plugin tres\n");
+    printf("Bye from inside plugin tres\n");
     
 }
 
@@ -55,13 +55,13 @@ lpvdp_argumentos sucesso(lpvdp_argumentos args) {
     lpvdp_argumentos ret;
     
     memset(&ret, 0, sizeof(lpvdp_argumentos));
-    printf("Ola de dentro da funcao sucesso do plugin tres, recebi: %d!\n", *(int*)args.dados);
+    printf("Hello from inside the success procedure of plugin tres, I received: %d!\n", *(int*)args.dados);
     --estado;
     
     return ret;
 }
 
 void falha(lpvdp_resultado resultado) {
-    printf("Ola de dentro da funcao falha do plugin tres com resultado: %s\n", lpvdp_str_resultado(resultado));
+    printf("Hello from inside the fail procedure of plugin tres with result: %s\n", lpvdp_str_resultado(resultado));
     --estado;
 }

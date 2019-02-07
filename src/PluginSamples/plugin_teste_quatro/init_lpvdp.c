@@ -34,7 +34,7 @@ void init_lpvdp() {
     
     estado = 1;
     
-    printf("Ola de dentro do plugin teste quatro!\n");
+    printf("Hello from inside plugin quatro!\n");
     
     args.bytes = sizeof(int);
     args.dados = (void *) malloc(sizeof(int));
@@ -44,11 +44,11 @@ void init_lpvdp() {
     lpvdp_r = lpvdp_paralelizar("libsample_plugin_quatro.so", "jamais_voltarei", args, sucesso, falha);
     
     if(lpvdp_r != LPVDP_PARALELIZADO)
-        printf("Falha ao solicitar a paralelizacao na plataforma do plugin quatro: %s\n", lpvdp_str_resultado(lpvdp_r));
+        printf("Failed to parallelize a procedure of plugin quatro: %s\n", lpvdp_str_resultado(lpvdp_r));
     else 
         while(estado);
     
-    printf("Bye de dentro do plugin quatro\n");
+    printf("Bye from inside plugin quatro\n");
     
 }
 
@@ -56,7 +56,7 @@ lpvdp_argumentos jamais_voltarei(lpvdp_argumentos args) {
     lpvdp_argumentos ret;
     
     memset(&ret, 0, sizeof(lpvdp_argumentos));
-    printf("Ola de dentro da funcao que jamais retornara do plugin quatro, recebi: %d!\n", *(int*)args.dados);
+    printf("Hello from inside the jamais_voltarei procedure, which will never return, of plugin quatro, I received: %d!\n", *(int*)args.dados);
     
     while(1);
     
@@ -67,13 +67,13 @@ lpvdp_argumentos sucesso(lpvdp_argumentos args) {
     lpvdp_argumentos ret;
     
     memset(&ret, 0, sizeof(lpvdp_argumentos));
-    printf("Ola de dentro da funcao sucesso do plugin quatro, recebi: %d!\n", *(int*)args.dados);
+    printf("Hello from inside the success procedure of plugin quatro, I received: %d!\n", *(int*)args.dados);
     --estado;
     
     return ret;
 }
 
 void falha(lpvdp_resultado resultado) {
-    printf("Ola de dentro da funcao falha do plugin quatro com resultado: %s\n", lpvdp_str_resultado(resultado));
+    printf("Hello from inside the fail procedure of plugin quatro with result: %s\n", lpvdp_str_resultado(resultado));
     --estado;
 }
