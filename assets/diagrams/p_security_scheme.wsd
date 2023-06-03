@@ -1,0 +1,38 @@
+@startuml P security scheme
+skinparam monochrome true
+skinparam ActivityFontSize 18
+skinparam PartitionFontSize 20
+partition P {
+  start
+  fork
+    :decrypts A and B;
+    fork
+      partition A {
+        :signals to P1;
+        repeat :analysis P1;
+        repeat while
+        detach
+      }
+    fork again
+      partition B {
+        :signals to P1;
+        repeat :analysis PEB;
+        repeat while
+        detach
+      }
+    fork again
+      :Waits for P1;
+    end fork
+  fork again
+    partition P1 {
+      :waits for A and B;
+      :decrypts P2;
+      partition P2 {
+        :..........;
+      }
+    }
+    detach
+  end fork
+  stop
+}
+@enduml
