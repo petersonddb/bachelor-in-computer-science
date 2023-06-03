@@ -1,0 +1,4 @@
+#Regular expressions to define the language tokens
+
+id = [a-zA-Z][a-zA-Z0-9]*
+num = [0-9]*
